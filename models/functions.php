@@ -1,4 +1,5 @@
 <?php
+
 require_once('db.php');
 
 function getUserType($user_id) {
