@@ -32,20 +32,18 @@
                     if ($_SESSION['account_type'] === 'ADMIN' && $row['account_type'] !== 'ADMIN') {
                         ?>
                         <td><button><a href="index.php?view=users&p=edit&id=<?= $row['id']; ?>">edit</a></button></td>
+                        <td><button><a href="index.php?view=users&p=delete&id=<?= $row['id']; ?>">delete</a></button></td>
                         <?php
                     } else if ($row['id'] === $_SESSION['user_id']){
                         ?>
                         <td><button><a href="index.php?view=users&p=edit&id=<?= $row['id']; ?>">edit</a></button></td>
+                        <td></td>
                         <?php
                     } else {
                         ?>
                         <td></td>
+                        <td></td>
                         <?php
-                    }
-                    if (isAdmin($_SESSION['user_id'])) {
-                    ?>
-                        <td><button><a href="index.php?view=users&p=delete&id=<?= $row['id']; ?>">delete</a></button></td>
-                    <?php
                     }
                     ?>
                     <td><button><a href="index.php?view=posts&p=postsUser&id=<?= $row['id'] ?>">See posts</a></button>
@@ -55,11 +53,13 @@
         ?>
         </table>
         <?php
-            $nbPages = ceil($count / 25);
-            for ($i = 1 ; $i <= $nbPages; $i++) {
-                ?>  
-                    <a href="index.php?view=users&page=<?= $i - 1; ?>&order=<?= $_SESSION['order']; ?>"><?= $i; ?></a>
-                <?php
+            if ($count >25) {
+                $nbPages = ceil($count / 25);
+                for ($i = 1 ; $i <= $nbPages; $i++) {
+                    ?>  
+                        <a href="index.php?view=users&page=<?= $i - 1; ?>&order=<?= $_SESSION['order']; ?>"><?= $i; ?></a>
+                    <?php
+                }
             }
         ?>
     </div>

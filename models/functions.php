@@ -79,6 +79,9 @@ function getCount($user_id) {
         $req = $db->query("SELECT COUNT(*) AS count FROM users");
     } else if ($user['account_type'] === 'MODERATOR') {
         $req = $db->query("SELECT COUNT(*) AS count FROM users WHERE NOT account_type = 'ADMIN'");
+    } else {
+        $req = $db->prepare("SELECT COUNT(*) AS count FROM users WHERE id = ?");
+        $req->execute([ $user_id ]);
     }
     $count = $req->fetch();
 

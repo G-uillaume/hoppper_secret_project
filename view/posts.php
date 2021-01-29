@@ -13,6 +13,8 @@ if (!empty($posts)) {
         <div class="post">
         <h2><?= strtoupper($post['firstname']) ?> <?= strtoupper($post['lastname']) ?>, le <?= $post['date_fr'] ?></h2>
             <?php
+            // print_r(explode(",", $post['tags']));
+
             foreach(json_decode($post['tags'], true) as $title => $color) {
                 ?>
                 <h3 class="tags" style="background-color: <?= $color ?>;"><?= $title ?></h3>
